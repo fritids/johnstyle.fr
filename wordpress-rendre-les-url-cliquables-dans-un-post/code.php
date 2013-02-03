@@ -9,3 +9,4 @@ function linkUrlInContent($content)
     $content = preg_replace("#-(http://[^\s<\"']+)($|\s|<)#si", "$1$2", $content);
     return $content;
 }
+
