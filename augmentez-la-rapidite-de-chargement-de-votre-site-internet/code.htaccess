@@ -1,0 +1,27 @@
+SetOutputFilter DEFLATE
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript application/x-httpd-php
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4\.0[678] no-gzip
+BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
+Header append Vary User-Agent env=!dont-vary
+<IfModule mod_headers.c>
+    <FilesMatch "\.(ico|jpe?g|png|gif|swf|gz|ttf)$">
+        Header set Cache-Control "max-age={BROWSER_CACHE_MAX_AGE}, public"
+    </FilesMatch>
+    <FilesMatch "\.(css)$">
+        Header set Cache-Control "max-age={BROWSER_CACHE_MAX_AGE}, public"
+    </FilesMatch>
+    <FilesMatch "\.(js)$">
+        Header set Cache-Control "max-age={BROWSER_CACHE_MAX_AGE}, private"
+    </FilesMatch>
+    <filesMatch "\.(html|htm)$">
+        Header set Cache-Control "max-age={BROWSER_CACHE_MAX_AGE}, public"
+    </filesMatch>   
+    <FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
+        Header unset Cache-Control
+    </FilesMatch>   
+</IfModule>
+Header unset ETag
+FileETag none
