@@ -1,0 +1,8 @@
+# Désactive les directives obsolètes register_globals
+SetEnv REGISTER_GLOBALS 0
+
+# Désactive les magic_quotes
+SetEnv MAGIC_QUOTES 0
+
+# Protège la lecture des répertoires
+Options -Indexes
